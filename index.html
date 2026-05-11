@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>👻 Pokémon Surprise</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      background: #1a1a2e;
+      color: white;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .page {
+      display: none;
+      padding-top: 80px;
+    }
+
+    .active {
+      display: block;
+    }
+
+    button {
+      padding: 12px 20px;
+      margin: 10px;
+      border-radius: 10px;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .yes {
+      background: #ff4da6;
+      color: white;
+    }
+
+    .no {
+      background: #555;
+      color: white;
+      position: absolute;
+    }
+
+    .shake {
+      animation: shake 0.3s infinite;
+    }
+
+    @keyframes shake {
+      0% { transform: translate(1px,1px); }
+      25% { transform: translate(-2px,2px); }
+      50% { transform: translate(-2px,-2px); }
+      75% { transform: translate(2px,-1px); }
+      100% { transform: translate(1px,-2px); }
+    }
+
+    input {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: none;
+      margin-top: 10px;
+    }
+
+    .memes img {
+      width: 180px;
+      margin: 10px;
+      border-radius: 10px;
+    }
+
+    .heart {
+      font-size: 30px;
+      animation: float 3s infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0); }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div class="page active" id="page1">
+  <h1>👻 do you want to hear something funny?</h1>
+
+  <button class="yes" onclick="goPage2()">yes 💖</button>
+  <button class="no" id="noBtn">no 😭</button>
+
+  <p>not so bad buddy 😌</p>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="page2">
+  <h1>👻 Gengar says hi</h1>
+
+  <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/94.png" width="150">
+
+  <p>oh hey friend 😏 you pressed the right question</p>
+  <p>what are 3 words nati says a lot hmm????</p>
+
+  <input id="answer" placeholder="type here...">
+  <br>
+  <button onclick="checkAnswer()">submit</button>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="page3">
+  <h1>💀 you got it</h1>
+
+  <p>here’s your reward 😭💗</p>
+
+  <div class="memes">
+    <img src="https://i.imgflip.com/4/1bij.jpg">
+    <img src="https://i.imgflip.com/4/26am.jpg">
+    <img src="https://i.imgflip.com/4/1otk96.jpg">
+  </div>
+
+  <div>
+    <span class="heart">💖</span>
+    <span class="heart">💗</span>
+    <span class="heart">💞</span>
+    <span class="heart">💘</span>
+  </div>
+
+  <button onclick="goPage4()">final message</button>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page" id="page4">
+  <h1>💌 final page</h1>
+
+  <p>
+    LOL hehe i just wasted so much of ur time because i love bothering you so much, i love you so much baby.  
+    Youre my favorite person ever and your so precious. I will send another one later this was a test run.
+  </p>
+
+  <p>rate this 1–10 😌</p>
+  <input id="rating" type="number" min="1" max="10">
+  <button onclick="rate()">send</button>
+
+  <div id="final"></div>
+</div>
+
+<script>
+/* PAGE SWITCH */
+function show(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(page).classList.add('active');
+}
+
+function goPage2() {
+  show('page2');
+}
+
+/* NO BUTTON MOVES */
+const noBtn = document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseover", () => {
+  const x = Math.random() * window.innerWidth * 0.8;
+  const y = Math.random() * window.innerHeight * 0.8;
+
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+  noBtn.classList.add("shake");
+
+  setTimeout(() => noBtn.classList.remove("shake"), 300);
+});
+
+/* PAGE 2 ANSWER */
+function checkAnswer() {
+  const val = document.getElementById("answer").value.toLowerCase();
+
+  // flexible answer (you can change later if you want)
+  if (val.length > 0) {
+    show('page3');
+  } else {
+    alert("try again 😭");
+  }
+}
+
+/* PAGE 4 */
+function goPage4() {
+  show('page4');
+}
+
+function rate() {
+  const r = document.getElementById("rating").value;
+
+  document.getElementById("final").innerHTML = `
+    <h2>you rated it ${r}/10 💗</h2>
+    <p>sending kisses...</p>
+    <p>💋💋💋💋💋💋💋💋💋💋</p>
+    <p>home is wherever you are 😭💖</p>
+  `;
+}
+</script>
+
+</body>
+</html>
